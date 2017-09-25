@@ -1,0 +1,43 @@
+---
+title: "Ex 3.9 Markdown"
+author: "Ace Skyhawk (with help from Prof Carver)"
+output:
+  word_document: default
+  html_notebook: default
+---
+
+# Introduction
+This document illustrates the use of an R Notebook and R Markdown to create a reproducible product in the R language. The example is based on Exercise 3.9 in *MDSR*. You can create simple paragraphs to document your work, and intersperse code junks along the way. 
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+
+## Exercise 3.9 (page 61)
+"Using the data from the `nasaweather` package, create a scatterplot between wind and pressure, with color being used to distinguish the type of storm"
+
+We'll use ggplot2 to create the scatterplot using the data stored in `nasaweather`. Unfortunately, our server does not yet have the `nasaweather` package installed, so we first need to install it, and then invoke it with a `library` command, and then look at the structure of the dataframe.  
+
+```{r}
+# install.packages("nasaweather")  having once installed no need to install again.
+library(nasaweather)
+library(ggplot2)
+str(storms)
+```
+
+From the `str` output, we see the names of the variables involved in the ggplot command, as follows:
+
+```{r}
+g <- ggplot(data=storms, aes(y=wind, x=pressure))
+g <- g + geom_point(size=1)
+g <- g + aes(color = type)
+g <- g + ggtitle("Wind and Pressure by Storm Type")
+g
+
+```
+  
+## Conclusion  
+
+It appears that there is generally a negative relationship between temperature and pressure, and that different storm types have characteristic patterns of wind and pressure.
+
+
+
